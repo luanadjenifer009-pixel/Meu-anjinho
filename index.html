@@ -1,0 +1,785 @@
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para o meu amor ❤️</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --pink: #ff72a5;
+  --light: #fff0f5;
+  --dark: #873653;
+  --white: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  color: var(--dark);
+  background: linear-gradient(135deg, #ffe0ec, #fff5f8, #ffd2e3);
+  overflow-x: hidden;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#hearts {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.heart {
+  position: absolute;
+  bottom: -40px;
+  animation: floatUp linear forwards;
+  opacity: .65;
+}
+
+@keyframes floatUp {
+  from {
+    transform: translateY(0) rotate(0deg);
+    opacity: .7;
+  }
+  to {
+    transform: translateY(-115vh) rotate(35deg);
+    opacity: 0;
+  }
+}
+
+.app {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 22px 15px;
+}
+
+.top {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.top small {
+  letter-spacing: 3px;
+  font-size: 10px;
+  font-weight: 600;
+  color: #bb6687;
+}
+
+.progress {
+  width: min(340px, 85vw);
+  height: 5px;
+  background: #ffffffa8;
+  border-radius: 20px;
+  margin: 12px auto 0;
+  overflow: hidden;
+}
+
+#progressBar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #ff8bb5, #f45191);
+  border-radius: 20px;
+  transition: width .4s;
+}
+
+.card {
+  width: min(440px, 100%);
+  min-height: 520px;
+  padding: 30px 23px;
+  background: #ffffffd9;
+  border: 1px solid #ffffff;
+  border-radius: 30px;
+  box-shadow: 0 18px 55px #c45c8020;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation: appear .5s ease;
+  backdrop-filter: blur(12px);
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(15px) scale(.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.emoji {
+  font-size: 65px;
+  margin-bottom: 16px;
+  filter: drop-shadow(0 5px 8px #ff9bbb35);
+}
+
+h1, h2 {
+  font-family: 'Dancing Script', cursive;
+  color: #d94c83;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: clamp(36px, 9vw, 49px);
+  margin-bottom: 18px;
+}
+
+h2 {
+  font-size: 36px;
+  margin-bottom: 18px;
+}
+
+p {
+  font-size: 14px;
+  line-height: 1.95;
+  margin-bottom: 15px;
+}
+
+.highlight {
+  color: #e64d87;
+  font-weight: 600;
+}
+
+.note {
+  background: #fff0f6;
+  border: 1px dashed #ff9cbd;
+  border-radius: 18px;
+  padding: 15px;
+  margin: 8px 0 17px;
+  width: 100%;
+  font-size: 13px;
+  line-height: 1.9;
+}
+
+button.main {
+  border: none;
+  color: white;
+  background: linear-gradient(135deg, #ff8bb5, #e94c8a);
+  border-radius: 30px;
+  padding: 14px 23px;
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: 0 7px 18px #e94c8a35;
+  transition: transform .2s, box-shadow .2s;
+  margin: 5px;
+}
+
+button.main:active {
+  transform: scale(.96);
+}
+
+button.secondary {
+  background: white;
+  color: #d94c83;
+  border: 1px solid #ffc0d5;
+  border-radius: 25px;
+  padding: 12px 18px;
+  font-size: 12px;
+  margin: 5px;
+}
+
+.nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.nav button {
+  min-width: 110px;
+}
+
+#slideNumber {
+  font-size: 11px;
+  color: #b46c87;
+  margin-top: 13px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.choice {
+  display: block;
+  width: 100%;
+  margin: 7px 0;
+  border: 1px solid #ffc5d9;
+  background: white;
+  color: #b64072;
+  border-radius: 17px;
+  padding: 13px 10px;
+  font-size: 13px;
+  transition: .2s;
+}
+
+.choice:hover {
+  background: #fff0f6;
+  transform: translateY(-2px);
+}
+
+.choice.selected {
+  background: #ffe0ec;
+  border-color: #e94c8a;
+}
+
+.letter {
+  width: 100%;
+  background: #fff8fb;
+  border-radius: 20px;
+  padding: 18px;
+  text-align: left;
+  font-size: 13px;
+  line-height: 2;
+  border: 1px solid #ffe1eb;
+}
+
+.seal {
+  font-size: 48px;
+  cursor: pointer;
+  transition: transform .3s;
+}
+
+.seal:active {
+  transform: scale(1.2) rotate(-10deg);
+}
+
+.big-heart {
+  font-size: 70px;
+  animation: heartbeat 1.3s infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  15% { transform: scale(1.13); }
+  30% { transform: scale(1); }
+  45% { transform: scale(1.1); }
+}
+
+.memory {
+  padding: 15px;
+  background: #fff0f6;
+  border-radius: 17px;
+  width: 100%;
+  margin: 7px 0;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.footer {
+  margin-top: 16px;
+  font-size: 10px;
+  text-align: center;
+  color: #bb7893;
+}
+
+#toast {
+  position: fixed;
+  left: 50%;
+  bottom: 25px;
+  transform: translateX(-50%);
+  background: #b83f70;
+  color: white;
+  padding: 12px 18px;
+  border-radius: 20px;
+  font-size: 12px;
+  z-index: 5;
+  opacity: 0;
+  transition: opacity .3s;
+  width: max-content;
+  max-width: 90%;
+  text-align: center;
+  pointer-events: none;
+}
+
+#toast.show {
+  opacity: 1;
+}
+
+@media(max-height: 760px) {
+  .app {
+    justify-content: flex-start;
+  }
+  .card {
+    min-height: 470px;
+    padding: 23px 19px;
+  }
+  .emoji {
+    font-size: 52px;
+    margin-bottom: 10px;
+  }
+  h2 {
+    font-size: 32px;
+  }
+  p {
+    line-height: 1.8;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div id="hearts"></div>
+<div id="toast"></div>
+
+<main class="app">
+
+  <header class="top">
+    <small>♡ UM CANTINHO SÓ NOSSO ♡</small>
+    <div class="progress">
+      <div id="progressBar"></div>
+    </div>
+  </header>
+
+  <section class="card" id="card">
+    <!-- Os slides aparecem aqui -->
+  </section>
+
+  <div class="nav">
+    <button class="secondary" id="backBtn" onclick="previousSlide()">← Voltar</button>
+    <button class="main" id="nextBtn" onclick="nextSlide()">Continuar 💗</button>
+  </div>
+
+  <div id="slideNumber"></div>
+
+  <div class="footer">
+    FEITO COM AMOR, PARA UMA PESSOA MUITO ESPECIAL ❤️
+  </div>
+
+</main>
+
+<script>
+const slides = [
+
+{
+  emoji: "💌",
+  title: "Oi, meu amor...",
+  text: `
+    Eu preparei uma coisinha para você.
+    Não é só um site, nem apenas algumas palavras.
+    <br><br>
+    É um pedacinho do meu coração tentando
+    encontrar um jeito bonito de chegar até você.
+    <br><br>
+    <span class="highlight">Clique em continuar, meu bem. ❤️</span>
+  `,
+  button: "Abrir meu coração 💗"
+},
+
+{
+  emoji: "🥺",
+  title: "Sobre nós dois...",
+  text: `
+    Eu sei que a gente brigou e que os dois acabaram
+    errando em alguns momentos.
+    <br><br>
+    Talvez tenhamos falado coisas de um jeito que
+    machucou, talvez não tenhamos conseguido
+    entender o que o outro estava sentindo.
+    <br><br>
+    Mas eu não quero que uma discussão seja maior
+    do que todo o amor que construímos juntos.
+  `,
+  button: "Quero te contar mais ❤️"
+},
+
+{
+  emoji: "🫂",
+  title: "Eu reconheço meus erros",
+  text: `
+    Meu amor, eu também tenho coisas para melhorar.
+    Não sou perfeita e sei que, às vezes, posso
+    agir de uma maneira que não ajuda a resolver
+    as coisas.
+    <br><br>
+    <span class="highlight">Me desculpa pela minha parte nessa briga.</span>
+    Não quero que você pense que estou colocando
+    toda a culpa em você.
+    <br><br>
+    Eu quero aprender, amadurecer e cuidar melhor
+    de nós dois.
+  `,
+  button: "Mais uma cartinha 💌"
+},
+
+{
+  emoji: "🤍",
+  title: "Eu também quero te entender",
+  text: `
+    Eu sei que você também tem seus sentimentos,
+    suas preocupações e seus dias difíceis.
+    <br><br>
+    Não quero que você sinta que precisa ser
+    perfeito comigo. Quero que a gente possa
+    conversar, reconhecer os erros e encontrar
+    uma maneira melhor de resolver as diferenças.
+    <br><br>
+    <span class="highlight">Nós dois merecemos ser ouvidos,
+    respeitados e compreendidos.</span>
+  `,
+  button: "Continua, amor 🥹"
+},
+
+{
+  emoji: "💗",
+  title: "Você é muito importante",
+  text: `
+    Richard, você não é só alguém com quem eu namoro.
+    Você é uma pessoa que ocupa um lugar enorme
+    no meu coração.
+    <br><br>
+    Eu amo nossas conversas, os momentos bobos,
+    as risadas, o carinho e até aquelas pequenas
+    coisas que talvez você nem perceba que me fazem feliz.
+    <br><br>
+    Eu amo a história que estamos construindo.
+    E, mesmo quando as coisas ficam difíceis,
+    meu sentimento por você continua sendo muito importante.
+  `,
+  button: "Tem mais uma coisa... 💕"
+},
+
+{
+  emoji: "🥹",
+  title: "Eu sinto muito",
+  text: `
+    Se eu pudesse transformar este momento em alguma
+    coisa bonita, seria em uma oportunidade para nós
+    dois aprendermos um com o outro.
+    <br><br>
+    Não quero pedir desculpas só para acabar com
+    a discussão. Quero que elas venham acompanhadas
+    de atitudes melhores, de mais cuidado e de
+    mais disposição para conversar.
+    <br><br>
+    <span class="highlight">Me perdoa pelo que fiz de errado, meu amor.</span>
+    Quero fazer a minha parte para que a gente fique bem.
+  `,
+  button: "Uma pergunta para você 💌"
+},
+
+{
+  emoji: "🩷",
+  title: "Posso te perguntar?",
+  text: `
+    Quando as coisas estiverem mais tranquilas,
+    eu gostaria muito que a gente conversasse com
+    carinho e sinceridade.
+    <br><br>
+    Sem precisar vencer uma discussão.
+    Sem transformar os sentimentos um do outro
+    em uma competição.
+    <br><br>
+    Só nós dois, tentando compreender o que aconteceu
+    e pensando em como podemos fazer melhor.
+  `,
+  choices: [
+    "💗 Quero conversar com você",
+    "🫂 Preciso de um tempinho",
+    "🥹 Quero receber seu carinho"
+  ]
+},
+
+{
+  emoji: "💞",
+  title: "Uma coisa que eu nunca quero esquecer",
+  text: `
+    O nosso relacionamento não precisa ser perfeito
+    para ser especial.
+    <br><br>
+    Nós somos duas pessoas aprendendo a amar,
+    cada uma com seus sentimentos, suas dificuldades
+    e seu jeito de enxergar o mundo.
+    <br><br>
+    Quero que a gente tenha espaço para errar,
+    pedir desculpas, mudar e recomeçar.
+    <br><br>
+    <span class="highlight">Não quero que o orgulho fale mais alto
+    do que a vontade de nos entendermos.</span>
+  `,
+  button: "Agora vem a cartinha final 💌"
+},
+
+{
+  emoji: "💌",
+  title: "Uma cartinha para você",
+  text: `
+    <div class="letter">
+      Meu amor, Richard... ❤️
+      <br><br>
+      Eu te amo muito, muito mesmo. Talvez nem
+      todas as palavras do mundo consigam explicar
+      o tamanho do carinho que sinto por você.
+      <br><br>
+      Eu não quero que a nossa história seja definida
+      pelas nossas brigas, mas pelo que fazemos depois
+      delas: como conversamos, como nos escutamos e
+      como tentamos cuidar um do outro.
+      <br><br>
+      Eu reconheço que também erro e quero melhorar.
+      Quero que você saiba que seus sentimentos
+      importam para mim e que eu desejo que nós dois
+      possamos ficar bem.
+      <br><br>
+      Obrigada por fazer parte da minha vida.
+      Eu amo você, meu anjinho, e desejo que a gente
+      continue construindo uma história cheia de
+      carinho, respeito, cumplicidade e momentos felizes.
+      <br><br>
+      Com todo o meu amor,
+      <br>
+      <span class="highlight">Sua princesa, Luana. ❤️</span>
+    </div>
+  `,
+  button: "Tem uma última surpresa... 🥹"
+},
+
+{
+  emoji: "💖",
+  title: "Se eu pudesse escolher...",
+  text: `
+    Eu escolheria continuar aprendendo a te amar
+    de uma maneira cada vez melhor.
+    <br><br>
+    Escolheria conversar quando fosse difícil,
+    ouvir quando não entendesse e reconhecer
+    quando precisasse mudar.
+    <br><br>
+    Não porque nunca vamos discordar, mas porque
+    quero que o nosso amor seja acompanhado de
+    respeito, paciência e cuidado.
+    <br><br>
+    <span class="highlight">Você é muito especial para mim, Richard.</span>
+  `,
+  button: "Clique para terminar 💗"
+},
+
+{
+  emoji: "❤️",
+  title: "Uma pergunta do coração",
+  text: `
+    Meu amor, eu não espero que todas as mágoas
+    desapareçam em um segundo.
+    <br><br>
+    Só queria que você recebesse esta mensagem
+    sabendo que eu te amo, reconheço meus erros
+    e desejo que a gente encontre um caminho
+    para ficar bem.
+    <br><br>
+    <span class="highlight">Você aceita conversar comigo
+    e tentar recomeçar esse momento com carinho?</span>
+  `,
+  choices: [
+    "❤️ Sim, vamos conversar",
+    "🫂 Quero um tempinho, mas te amo",
+    "💌 Quero te responder pessoalmente"
+  ]
+},
+
+{
+  emoji: "💗",
+  title: "Você mora no meu coração",
+  text: `
+    Obrigada por chegar até o final, meu amor.
+    <br><br>
+    Fiz tudo isso pensando em você e em nós.
+    Espero que, ao ler cada pedacinho, você tenha
+    sentido o carinho que coloquei nestas palavras.
+    <br><br>
+    Eu te amo, Richard.
+    <br><br>
+    <div class="big-heart">❤️</div>
+    <span class="highlight">Com carinho, da sua Luana.</span>
+    <br><br>
+    <small>Você pode voltar e ler qualquer cartinha
+    sempre que quiser. 💕</small>
+  `,
+  button: "Ler tudo de novo ↻",
+  restart: true
+}
+
+];
+
+let current = 0;
+let selectedChoices = {};
+
+const card = document.getElementById("card");
+const nextBtn = document.getElementById("nextBtn");
+const backBtn = document.getElementById("backBtn");
+
+function renderSlide() {
+  const slide = slides[current];
+
+  card.style.animation = "none";
+  void card.offsetWidth;
+  card.style.animation = "appear .5s ease";
+
+  let html = `
+    <div class="emoji">${slide.emoji}</div>
+    <h2>${slide.title}</h2>
+    <p>${slide.text}</p>
+  `;
+
+  if (slide.choices) {
+    html += `<div style="width:100%;margin-top:5px">`;
+
+    slide.choices.forEach((choice, index) => {
+      const selected = selectedChoices[current] === index
+        ? "selected"
+        : "";
+
+      html += `
+        <button class="choice ${selected}"
+          onclick="selectChoice(${index})">
+          ${choice}
+        </button>
+      `;
+    });
+
+    html += `</div>`;
+  }
+
+  if (current === 0) {
+    html += `
+      <div class="seal" onclick="nextSlide()"
+        title="Abrir cartinha">💌</div>
+    `;
+  }
+
+  card.innerHTML = html;
+
+  backBtn.style.visibility = current === 0
+    ? "hidden"
+    : "visible";
+
+  if (slide.restart) {
+    nextBtn.textContent = "Recomeçar ❤️";
+  } else if (slide.choices) {
+    nextBtn.textContent = "Minha resposta 💗";
+  } else {
+    nextBtn.textContent = slide.button || "Continuar 💗";
+  }
+
+  document.getElementById("progressBar").style.width =
+    ((current + 1) / slides.length * 100) + "%";
+
+  document.getElementById("slideNumber").textContent =
+    `Cartinha ${current + 1} de ${slides.length}`;
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function nextSlide() {
+  const slide = slides[current];
+
+  if (slide.restart) {
+    current = 0;
+    selectedChoices = {};
+    renderSlide();
+    return;
+  }
+
+  if (slide.choices && selectedChoices[current] === undefined) {
+    showToast("Escolha uma resposta primeiro, meu amor 💗");
+    return;
+  }
+
+  if (slide.choices) {
+    const choice = slide.choices[selectedChoices[current]];
+    showToast("Sua escolha: " + choice);
+  }
+
+  if (current < slides.length - 1) {
+    current++;
+    renderSlide();
+    createBurst();
+  }
+}
+
+function previousSlide() {
+  if (current > 0) {
+    current--;
+    renderSlide();
+  }
+}
+
+function selectChoice(index) {
+  selectedChoices[current] = index;
+  renderSlide();
+
+  if (current === 6) {
+    showToast("Resposta guardada neste site 💕");
+  } else {
+    showToast("Escolha feita com carinho ❤️");
+  }
+}
+
+function showToast(message) {
+  const toast = document.getElementById("toast");
+  toast.textContent = message;
+  toast.classList.add("show");
+
+  clearTimeout(window.toastTimer);
+
+  window.toastTimer = setTimeout(() => {
+    toast.classList.remove("show");
+  }, 2400);
+}
+
+function createHeart() {
+  const container = document.getElementById("hearts");
+  const heart = document.createElement("span");
+
+  heart.className = "heart";
+  heart.textContent = ["💗", "💕", "♡", "💖", "🌸"][
+    Math.floor(Math.random() * 5)
+  ];
+
+  heart.style.left = Math.random() * 100 + "%";
+  heart.style.fontSize = (12 + Math.random() * 20) + "px";
+  heart.style.animationDuration = (7 + Math.random() * 7) + "s";
+
+  container.appendChild(heart);
+
+  setTimeout(() => heart.remove(), 15000);
+}
+
+function createBurst() {
+  for (let i = 0; i < 12; i++) {
+    setTimeout(createHeart, i * 70);
+  }
+}
+
+setInterval(createHeart, 850);
+
+renderSlide();
+</script>
+
+</body>
+</html>
+```
+  
